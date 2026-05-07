@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-color: #f9fafb;
+    --text-color: #111827;
+  }
+
+  :root.dark {
+    --bg-color: #030712;
+    --text-color: #f9fafb;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    @apply antialiased transition-colors duration-300;
+  }
+}
+
+/* Ensure dark: variants work with the .dark class */
+@custom-variant dark (&:where(.dark, .dark *));
