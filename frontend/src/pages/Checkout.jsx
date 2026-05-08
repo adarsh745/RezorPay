@@ -53,10 +53,12 @@ const Checkout = () => {
               {
                 ...response,
                 amount: totalAmount,
-                products: cart.products.map(p => ({
+                products: cart.products
+                  .filter(p => p.productId)
+                  .map(p => ({
                     productId: p.productId._id,
                     quantity: p.quantity
-                }))
+                  }))
               },
               config
             );
