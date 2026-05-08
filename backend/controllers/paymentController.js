@@ -50,6 +50,12 @@ const verifyPayment = async (req, res) => {
       .update(sign.toString())
       .digest('hex');
 
+    console.log('Razorpay Secret Loaded:', !!process.env.RAZORPAY_KEY_SECRET);
+    console.log('Order ID:', razorpay_order_id);
+    console.log('Payment ID:', razorpay_payment_id);
+    console.log('Received Signature:', razorpay_signature);
+    console.log('Expected Signature:', expectedSign);
+
     if (razorpay_signature === expectedSign) {
       // Payment is successful
 
