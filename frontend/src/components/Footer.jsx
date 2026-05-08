@@ -50,6 +50,12 @@ const Footer = () => {
               <li><Link to="/contact" className="hover:text-blue-600 transition-colors">Contact Us</Link></li>
               <li><Link to="/privacy-policy" className="hover:text-blue-600 transition-colors">Privacy Policy</Link></li>
               <li><Link to="/refund-policy" className="hover:text-blue-600 transition-colors">Refund Policy</Link></li>
+              <li className="pt-2 text-xs border-t border-gray-100 dark:border-gray-900">
+                <a href="mailto:adarshjanjirala745@gmail.com" className="hover:text-blue-600 transition-colors flex items-center gap-2">
+                  <Mail className="w-3 h-3" />
+                  adarshjanjirala745@gmail.com
+                </a>
+              </li>
             </ul>
           </div>
 

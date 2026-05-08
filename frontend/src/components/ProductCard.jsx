@@ -1,13 +1,18 @@
 import { Link } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react';
+import { BACKEND_URL } from '../api';
 
 const ProductCard = ({ product }) => {
+  const imageUrl = product.image.startsWith('http') 
+    ? product.image 
+    : `${BACKEND_URL}${product.image}`;
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden group border border-transparent dark:border-gray-700">
       <Link to={`/product/${product._id}`}>
         <div className="relative aspect-square overflow-hidden bg-gray-100 dark:bg-gray-700">
           <img
-            src={product.image}
+            src={imageUrl}
             alt={product.title}
             className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300 mix-blend-multiply dark:mix-blend-normal"
           />

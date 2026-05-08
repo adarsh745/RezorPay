@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API, { BACKEND_URL } from '../api';
 import { ShoppingCart, ArrowLeft } from 'lucide-react';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
@@ -18,7 +18,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(`/api/products/${id}`);
+        const { data } = await API.get(`/api/products/${id}`);
         setProduct(data);
         setLoading(false);
       } catch (error) {
@@ -64,7 +64,7 @@ const ProductDetails = () => {
         {/* Product Image */}
         <div className="bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden flex items-center justify-center p-8 aspect-square">
           <img
-            src={product.image}
+            src={product.image && (product.image.startsWith('http') ? product.image : `${BACKEND_URL}${product.image}`)}
             alt={product.title}
             className="object-contain max-h-full mix-blend-multiply dark:mix-blend-normal"
           />

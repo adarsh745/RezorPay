@@ -10,7 +10,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const subtotal = cart?.products?.reduce(
-    (acc, item) => acc + item.productId.price * item.quantity,
+    (acc, item) => acc + (item.productId?.price || 0) * item.quantity,
     0
   ) || 0;
 
@@ -47,7 +47,7 @@ const Cart = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cart Items */}
         <div className="lg:col-span-2 space-y-4">
-          {cart.products.map((item) => (
+          {cart.products.filter(item => item.productId).map((item) => (
             <div
               key={item.productId._id}
               className="bg-white p-4 rounded-xl shadow-sm flex flex-col sm:flex-row items-center border border-gray-100"

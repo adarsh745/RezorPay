@@ -19,7 +19,7 @@ const Checkout = () => {
   }, [cart, navigate]);
 
   const totalAmount = cart?.products?.reduce(
-    (acc, item) => acc + item.productId.price * item.quantity,
+    (acc, item) => acc + (item.productId?.price || 0) * item.quantity,
     0
   ) || 0;
 
@@ -39,7 +39,7 @@ const Checkout = () => {
 
       // 2. Open Razorpay Popup
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_Sm0ptLTVOvCMxI',
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: orderData.amount,
         currency: 'INR',
         name: 'TechStore',
@@ -123,7 +123,7 @@ const Checkout = () => {
             <h2 className="text-xl font-bold text-gray-900 mb-6">Payment Summary</h2>
             
             <div className="space-y-4 mb-8">
-              {cart?.products?.map((item) => (
+              {cart?.products?.filter(item => item.productId).map((item) => (
                 <div key={item.productId._id} className="flex justify-between text-sm">
                   <span className="text-gray-600">{item.productId.title} x {item.quantity}</span>
                   <span className="font-medium text-gray-900">₹{(item.productId.price * item.quantity).toLocaleString('en-IN')}</span>

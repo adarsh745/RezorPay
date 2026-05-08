@@ -7,11 +7,14 @@ const getCart = async (req, res) => {
   try {
     let cart = await Cart.findOne({ userId: req.user._id }).populate('products.productId');
     
-    if (!cart) {
+    if (cart) {
+      // Filter out products that no longer exist (population result is null)
+      cart.products = cart.products.filter(item => item.productId !== null);
+      res.json(cart);
+    } else {
       cart = await Cart.create({ userId: req.user._id, products: [] });
+      res.json(cart);
     }
-    
-    res.json(cart);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
