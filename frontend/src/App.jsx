@@ -35,7 +35,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
-        <Toaster position="bottom-right" />
+        <Toaster position="top-center" />
       </div>
     </Router>
   );
